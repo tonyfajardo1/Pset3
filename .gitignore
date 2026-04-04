@@ -1,0 +1,10 @@
+.env
+__pycache__/
+.ipynb_checkpoints/
+*.log
+*.tmp
+notebooks/data/
+evidencias/*.png
+evidencias/*.jpg
+evidencias/*.jpeg
+nul

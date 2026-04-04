@@ -1,0 +1,38 @@
+services:
+  pyspark-notebook:
+    image: jupyter/pyspark-notebook:latest
+    container_name: pyspark-notebook
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+      - "4040:4040"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./evidencias:/home/jovyan/evidencias
+    env_file:
+      - .env
+    environment:
+      - SPARK_LOCAL_IP=0.0.0.0
+      - PYSPARK_PYTHON=python
+      - JUPYTER_ENABLE_LAB=yes
+      - RUN_ID=${RUN_ID}
+      - START_YEAR=${START_YEAR}
+      - END_YEAR=${END_YEAR}
+      - MONTHS=${MONTHS}
+      - SERVICES=${SERVICES}
+      - PARQUET_BASE_URL=${PARQUET_BASE_URL}
+      - TAXI_ZONE_LOOKUP_URL=${TAXI_ZONE_LOOKUP_URL}
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT}
+      - SNOWFLAKE_HOST=${SNOWFLAKE_HOST}
+      - SNOWFLAKE_PORT=${SNOWFLAKE_PORT}
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+      - SNOWFLAKE_ROLE=${SNOWFLAKE_ROLE}
+      - SNOWFLAKE_WAREHOUSE=${SNOWFLAKE_WAREHOUSE}
+      - SNOWFLAKE_DATABASE=${SNOWFLAKE_DATABASE}
+      - SNOWFLAKE_SCHEMA_RAW=${SNOWFLAKE_SCHEMA_RAW}
+      - SNOWFLAKE_SCHEMA_ANALYTICS=${SNOWFLAKE_SCHEMA_ANALYTICS}
+      - VALIDATE_STRICT=${VALIDATE_STRICT}
+      - FAIL_ON_MISSING_MONTH=${FAIL_ON_MISSING_MONTH}
+      - SPARK_SNOWFLAKE_PACKAGE=${SPARK_SNOWFLAKE_PACKAGE}
+      - SNOWFLAKE_JDBC_PACKAGE=${SNOWFLAKE_JDBC_PACKAGE}
