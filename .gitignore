@@ -4,7 +4,4 @@ __pycache__/
 *.log
 *.tmp
 notebooks/data/
-evidencias/*.png
-evidencias/*.jpg
-evidencias/*.jpeg
 nul

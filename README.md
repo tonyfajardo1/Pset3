@@ -42,6 +42,12 @@ docker compose ps
 4. Abre Jupyter: `http://localhost:8888`
 5. Spark UI: `http://localhost:4040`
 
+Evidencias de infraestructura:
+
+![docker compose ps](evidencias/01_docker_compose_ps.png)
+![jupyter 8888](evidencias/02_jupyter_8888.png)
+![spark ui 4040](evidencias/03_spark_ui_4040.png)
+
 ## Variables de ambiente
 
 Maneja todo por `.env` (obligatorio).
@@ -122,6 +128,13 @@ Auditoria en `RAW.INGESTION_AUDIT`:
 - estado por lote (`OK`, `MISSING_SOURCE`, `FAILED`)
 - tiempos de carga y volumentria (`records_in`, `records_out`)
 
+Evidencias de calidad y auditoria:
+
+![quality ranges ok](evidencias/05_quality_ranges_ok.png)
+![quality temporal ok](evidencias/06_quality_temporal_ok.png)
+![audit status 264 ok](evidencias/07_audit_status_264_ok.png)
+![audit performance](evidencias/08_audit_performance.png)
+
 ## Cobertura 2015-2025 (matriz)
 
 Consulta usada para matriz de cobertura por servicio/mes:
@@ -133,11 +146,44 @@ GROUP BY 1,2,3
 ORDER BY 1,2,3;
 ```
 
-Estado esperado final:
+Matriz final (estado por servicio/anio/mes):
+
+| service_type | year | m01 | m02 | m03 | m04 | m05 | m06 | m07 | m08 | m09 | m10 | m11 | m12 |
+|---|---:|---|---|---|---|---|---|---|---|---|---|---|---|
+| yellow | 2015 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2016 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2017 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2018 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2019 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2020 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2021 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2022 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2023 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2024 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| yellow | 2025 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2015 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2016 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2017 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2018 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2019 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2020 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2021 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2022 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2023 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2024 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+| green | 2025 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK |
+
+Estado final consolidado:
 
 - `coverage_ok = True`
 - `expected_lotes = 264`
 - `real_lotes = 264`
+
+Evidencias de cobertura:
+
+![cobertura 264 ok](evidencias/04_cobertura_264_ok.png)
+![cobertura matriz ok](evidencias/13_cobertura_matriz_ok.png)
+![cobertura matriz resumen](evidencias/14_cobertura_matriz_resumen.png)
 
 ## Resultados obtenidos (corrida final)
 
@@ -150,6 +196,10 @@ Estado esperado final:
   - `distinct_trip_nk = 3597775`
   - `duplicated_keys = 0`
 
+Evidencia de escritura OBT:
+
+![obt write ok](evidencias/10_obt_write_ok.png)
+
 ## Idempotencia (evidencia)
 
 En notebook 03 se valida no duplicacion por `trip_nk` en una particion mensual (`IDEMP_SERVICE`, `IDEMP_YEAR`, `IDEMP_MONTH`).
@@ -159,6 +209,15 @@ Para evidencia completa del PDF:
 1. Reingestar un mes ya procesado en notebook 01.
 2. Ejecutar bloque de idempotencia en notebook 03.
 3. Confirmar `duplicated_keys = 0` y `rows_partition = distinct_trip_nk`.
+
+Evidencia de idempotencia:
+
+![idempotencia ok](evidencias/09_idempotencia_ok.png)
+
+## Evidencias de analisis (notebook 05)
+
+![analysis yoy](evidencias/11_analysis_yoy.png)
+![analysis congestion](evidencias/12_analysis_congestion.png)
 
 ## Evidencias requeridas
 
@@ -170,6 +229,23 @@ Guardar capturas en `evidencias/`:
 - calidad (`q_ranges`, `q_temporal`)
 - auditoria (`q_audit_status`, `q_audit_perf`)
 - snapshot de `ANALYTICS.OBT_TRIPS`
+
+Convencion de nombres usada:
+
+- `01_docker_compose_ps.png`
+- `02_jupyter_8888.png`
+- `03_spark_ui_4040.png`
+- `04_cobertura_264_ok.png`
+- `05_quality_ranges_ok.png`
+- `06_quality_temporal_ok.png`
+- `07_audit_status_264_ok.png`
+- `08_audit_performance.png`
+- `09_idempotencia_ok.png`
+- `10_obt_write_ok.png`
+- `11_analysis_yoy.png`
+- `12_analysis_congestion.png`
+- `13_cobertura_matriz_ok.png`
+- `14_cobertura_matriz_resumen.png`
 
 ## Troubleshooting rapido
 
