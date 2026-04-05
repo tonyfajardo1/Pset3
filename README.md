@@ -1,4 +1,5 @@
 # DM PSet 3
+Integrantes: Anthony Fajardo, Nicolas Soria, Ryan De La Torre, Juan Pablo Bautista
 
 Proyecto de Data Mining PSet 3: Spark (Jupyter) + Snowflake con modelo RAW y One Big Table (`ANALYTICS.OBT_TRIPS`).
 
