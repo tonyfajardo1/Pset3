@@ -222,7 +222,7 @@ Evidencia de idempotencia:
 
 ## Evidencias requeridas
 
-Guardar capturas en `evidencias/`:
+Guardado de capturas en `evidencias/`:
 
 - `docker compose ps`
 - Jupyter (`8888`) y Spark UI (`4040`)
@@ -230,26 +230,3 @@ Guardar capturas en `evidencias/`:
 - calidad (`q_ranges`, `q_temporal`)
 - auditoria (`q_audit_status`, `q_audit_perf`)
 - snapshot de `ANALYTICS.OBT_TRIPS`
-
-Convencion de nombres usada:
-
-- `01_docker_compose_ps.png`
-- `02_jupyter_8888.png`
-- `03_spark_ui_4040.png`
-- `04_cobertura_264_ok.png`
-- `05_quality_ranges_ok.png`
-- `06_quality_temporal_ok.png`
-- `07_audit_status_264_ok.png`
-- `08_audit_performance.png`
-- `09_idempotencia_ok.png`
-- `10_obt_write_ok.png`
-- `11_analysis_yoy.png`
-- `12_analysis_congestion.png`
-- `13_cobertura_matriz_ok.png`
-- `14_cobertura_matriz_resumen.png`
-
-## Troubleshooting rapido
-
-- `DATA_SOURCE_NOT_FOUND: snowflake`: revisar paquetes Spark Snowflake/JDBC en `.env`
-- `Incorrect username or password`: validar `SNOWFLAKE_ACCOUNT` exacto y password en `.env`
-- querys muy lentas: ejecutar por particiones o usar warehouse mayor temporalmente
